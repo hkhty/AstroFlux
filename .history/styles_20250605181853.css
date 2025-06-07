@@ -1,3 +1,4 @@
+/* Base Styles */
 :root {
     --primary-color: #6c63ff;
     --secondary-color: #4a45b1;
@@ -41,7 +42,6 @@ header {
     top: 0;
     width: 100%;
     background-color: rgba(26, 26, 46, 0.95);
-    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
