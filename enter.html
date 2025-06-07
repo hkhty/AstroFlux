@@ -16,7 +16,8 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             z-index: 9999;
             transform: translateY(100%);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.98;
         }
 
         .transition-overlay.active {
@@ -32,22 +33,26 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease-out forwards;
         }
 
         .enter-content::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 200%;
+            height: 200%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
-                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 10%),
-                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 10%);
+                radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(108, 99, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 30% 70%, rgba(108, 99, 255, 0.1) 0%, transparent 15%),
+                radial-gradient(circle at 70% 30%, rgba(108, 99, 255, 0.1) 0%, transparent 15%);
+            animation: gradientShift 15s ease infinite;
             pointer-events: none;
+        }
+
+        @keyframes gradientShift {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) rotate(180deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .enter-text {
@@ -55,14 +60,33 @@
             color: var(--light-color);
             max-width: 800px;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .enter-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
+            font-size: 5rem;
+            margin-bottom: 3rem;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: lowercase;
+            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
         }
 
         .enter-text p {
@@ -74,22 +98,30 @@
 
         .back-link {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--light-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-decoration: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .back-link:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-link:active {
+            transform: translateY(-1px);
         }
     </style>
 </head>
