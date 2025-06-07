@@ -6,8 +6,25 @@
     <title>AstroFlux</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            z-index: 9999;
+            transform: translateY(-100%);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .transition-overlay.active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
+    <div class="transition-overlay"></div>
     <header>
         <nav>
             <div class="logo">AstroFlux</div>
@@ -18,7 +35,7 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <h1>welcome to astroflux</h1>
-                <button type="button" class="cta-button">enter</button>
+                <a href="enter.html" class="cta-button">enter</a>
             </div>
         </section>
     </main>
@@ -29,13 +46,19 @@
     </footer>
 
     <script>
-        // Mobile menu toggle - currently just a placeholder
-        const hamburger = document.querySelector('.hamburger');
-        
-        // Add click handler for future menu functionality
-        hamburger.addEventListener('click', () => {
-            // Add menu toggle functionality here when needed
-            console.log('Menu clicked - add menu items here');
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.querySelector('.transition-overlay');
+            
+            document.querySelector('.cta-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = e.target.getAttribute('href');
+                
+                overlay.classList.add('active');
+                
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600);
+            });
         });
     </script>
 </body>
